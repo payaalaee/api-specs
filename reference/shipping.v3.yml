@@ -382,8 +382,8 @@ components:
       title: customsInformation
       description: Data about the customs information object.
       type: object
-      minProperties: 5
-      maxProperties: 5
+      minProperties: 7
+      maxProperties: 7
       x-internal: false
       properties:
         product_id:
@@ -410,6 +410,16 @@ components:
           example: true
         hs_codes:
           $ref: '#/components/schemas/harmonizedSystemCodes'
+        createdAt:
+          type: string
+          description: Date and time of the customs information's creation. Read-Only.
+          format: date-time
+          example: 2022-09-21T14:15:00Z
+        updatedAt:
+          type: string
+          description: Date and time when the customs information was last updated. Read-Only.
+          format: date-time
+          example: 2022-09-21T14:15:00Z
     harmonizedSystemCodes:
       title: harmonizedSystemCodes
       description: |-
