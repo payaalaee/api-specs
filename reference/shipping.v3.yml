@@ -319,9 +319,10 @@ components:
         - type: object
           properties:
             id:
-              description: Shipping-method ID. READ-ONLY
+              description: Shipping-method ID.
               example: 1
               type: integer
+              readOnly: true
         - $ref: '#/components/schemas/shippingMethod_Base'
       x-internal: false
     shippingMethod_Base:
