@@ -379,11 +379,9 @@ components:
           type: boolean
       x-internal: false
     customsInformation_request:
-      title: customsInformation
+      title: customsInformationRequest
       description: Data about the customs information object.
       type: object
-      minProperties: 7
-      maxProperties: 7
       x-internal: false
       properties:
         product_id:
@@ -410,12 +408,16 @@ components:
           example: true
         hs_codes:
           $ref: '#/components/schemas/harmonizedSystemCodes'
+      required:
+        - product_id
+        - country_of_origin
+        - commodity_description
+        - international_shipping
+        - hs_codes
     customsInformation:
       title: customsInformation
       description: Data about the customs information object.
       type: object
-      minProperties: 7
-      maxProperties: 7
       x-internal: false
       properties:
         product_id:
