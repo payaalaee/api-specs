@@ -449,13 +449,13 @@ components:
           description: Date and time of the customs information's creation.
           readOnly: true
           format: date-time
-          example: 2022-09-21T14:15:00Z
+          example: 2022-09-21T14:15:00+00:00
         updatedAt:
           type: string
           description: Date and time when the customs information was last updated.
           readOnly: true
           format: date-time
-          example: 2022-09-21T14:15:00Z
+          example: 2022-09-21T14:15:00+00:00
     harmonizedSystemCodes:
       title: harmonizedSystemCodes
       description: |-
