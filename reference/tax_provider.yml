@@ -10,7 +10,7 @@ servers:
   - url: 'https://{your_server}'
     variables:
       your_server:
-        default: store.example.com
+        default: your_profile.example.com
 paths:
   /estimate:
     post:
@@ -19,6 +19,11 @@ paths:
         - Tax Provider
       description: |-
         Submit the quote request to retrieve an estimate from the enabled third-party tax provider. Estimates are not expected to be persisted by the tax provider.
+
+        <!-- theme:info -->
+        > #### Server url
+        > - Substitute the profile specific to the tax provider for `your_profile.example.com`.
+        > - The Send a Test Request feature is not currently supported for this endpoint.
 
         The following actions can trigger tax estimate requests multiple times during a standard checkout on a BigCommerce storefront, depending on the BigCommerce merchant’s settings.
 
@@ -299,7 +304,14 @@ paths:
   /void:
     post:
       summary: Void Tax Quote
-      description: Invalidate the persisted tax quote as identified by the given unique ID. Relevant to order cancellations or when moving an order from a paid status to an unpaid status.
+      description: |- 
+        Invalidate the persisted tax quote as identified by the given unique ID. Relevant to order cancellations or when moving an order from a paid status to an unpaid status.
+      
+        <!-- theme:info -->
+        > #### Server url
+        > - Substitute the profile specific to the tax provider for `your_profile.example.com`.
+        > - The Send a Test Request feature is not currently supported for this endpoint.
+
       operationId: void
       parameters:
         - name: id
@@ -323,7 +335,14 @@ paths:
   /commit:
     post:
       summary: Commit Tax Quote
-      description: 'Submit the quote request to be persisted by the enabled third-party tax provider. A commit operation is intended to be submitted once only, when the Order has been confirmed and paid.'
+      description: |-
+        Submit the quote request to be persisted by the enabled third-party tax provider. A commit operation is intended to be submitted once only, when the Order has been confirmed and paid.
+
+        <!-- theme:info -->
+        > #### Server url
+        > - Substitute the profile specific to the tax provider for `your_profile.example.com`.
+        > - The Send a Test Request feature is not currently supported for this endpoint.
+
       operationId: commit
       parameters:
         - $ref: '#/components/parameters/header-storehash'
@@ -819,6 +838,11 @@ paths:
         Relevant for partial refunds, full refunds, returns, and other Order modifications where there have been changes to the tax liabilities.
 
         The returned **Tax Quote** response is expected to be the same to a response returned by an equivalent response to **estimate** or **commit** methods.
+      
+        <!-- theme:info -->
+        > #### Server url
+        > - Substitute the profile specific to the tax provider for `your_profile.example.com`.
+        > - The Send a Test Request feature is not currently supported for this endpoint.
       operationId: adjust
       tags:
         - Tax Provider
