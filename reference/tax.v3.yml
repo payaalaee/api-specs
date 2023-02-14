@@ -83,8 +83,11 @@ paths:
         '422':
           description: 'Unprocessable Entity, will include a specific error message referencing the issue.'
       description: |-
-        Set the HTTP Basic Authentication credentials for the specified provider. The configured `username` and `password` will be used to authenticate each API request to the Tax Provider from the associated store.
-
+        Set the HTTP Basic Authentication credentials and the (optional) profile for the specified provider. 
+        
+        The configured `username` and `password` will be used to authenticate each API request to the Tax Provider from the associated store.
+        The tax provider's `profile` will be included in the url for Tax Provider API endpoints. 
+        
         <!-- theme: info -->
         > #### Note
         > * This operation will be logged in [Store Logs](https://support.bigcommerce.com/s/article/Using-Store-Logs) under **Staff Actions**.
@@ -108,11 +111,15 @@ paths:
                 password:
                   type: string
                   example: h6eSgKLN72q7jYTW
+                profile:
+                  type: string
+                  example: your_app_name
         description: 'Basic authentication information, associated with a merchant account on the third-party tax provider''s infrastructure.'
         x-examples:
           application/json:
             username: MyTaxProviderAccount
             password: h6eSgKLN72q7jYTW
+            profile: test-profile
     parameters:
       - name: provider_id
         in: path
@@ -167,7 +174,7 @@ components:
         X-Auth-Token: {access_token}
         ```
 
-        * For more information on Authenticating BigCommerce APIs, see: [Authentication](/api-docs/getting-started/authentication). 
+        * For more information on Authenticating BigCommerce APIs, see: [Authentication](/api-docs/getting-started/authentication).
   schemas:
     response-connection:
       type: object
