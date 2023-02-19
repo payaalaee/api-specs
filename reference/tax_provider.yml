@@ -24,7 +24,7 @@ paths:
         > #### Server url
         > - Substitute the profile specific to the tax provider for `your_profile.example.com`.
         > - The Send a Test Request feature is not currently supported for this endpoint.
-        
+
         The following actions can trigger tax estimate requests multiple times during a standard checkout on a BigCommerce storefront, depending on the BigCommerce merchant’s settings.
 
         - After selecting a Shipping Method during the “Estimate Shipping & Tax” facility on the Cart page.
@@ -304,9 +304,9 @@ paths:
   /void:
     post:
       summary: Void Tax Quote
-      description: |-
+      description: |- 
         Invalidate the persisted tax quote as identified by the given unique ID. Relevant to order cancellations or when moving an order from a paid status to an unpaid status.
-        
+
         <!-- theme:info -->
         > #### Server url
         > - Substitute the profile specific to the tax provider for `your_profile.example.com`.
@@ -337,6 +337,7 @@ paths:
       summary: Commit Tax Quote
       description: |-
         Submit the quote request to be persisted by the enabled third-party tax provider. A commit operation is intended to be submitted once only, when the Order has been confirmed and paid.
+
         <!-- theme:info -->
         > #### Server url
         > - Substitute the profile specific to the tax provider for `your_profile.example.com`.
@@ -837,7 +838,7 @@ paths:
         Relevant for partial refunds, full refunds, returns, and other Order modifications where there have been changes to the tax liabilities.
 
         The returned **Tax Quote** response is expected to be the same to a response returned by an equivalent response to **estimate** or **commit** methods.
-        
+
         <!-- theme:info -->
         > #### Server url
         > - Substitute the profile specific to the tax provider for `your_profile.example.com`.

@@ -87,7 +87,7 @@ paths:
         
         The configured `username` and `password` will be used to authenticate each API request to the Tax Provider from the associated store.
         The tax provider's `profile` will be included in the url for Tax Provider API endpoints. 
-        
+
         <!-- theme: info -->
         > #### Note
         > * This operation will be logged in [Store Logs](https://support.bigcommerce.com/s/article/Using-Store-Logs) under **Staff Actions**.

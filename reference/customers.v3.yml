@@ -219,7 +219,7 @@ paths:
           $ref: '#/components/responses/CustomerCollectionResponse'
     post:
       description: |-
-        Creates Customers. Multiple customers can be created in one call.
+        Creates Customers. Create up to 10 customers in one call.
 
         **Required Fields**
         * last_name
@@ -239,8 +239,8 @@ paths:
         * attribute_value -- This is input as a string, regardless of the [Type](/api-reference/customer-subscribers/v3-customers-api/models/type).
 
         **Limits**
-        * Limit of 10 concurrent requests.
-
+        * Limit of 10 concurrent requests 
+        
         **Notes**
 
         A customer can be created with global access or channel-specific access.
@@ -305,6 +305,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/CustomerCollectionResponse'
+        '413':
+          description: The request payload is too large. The maximum number of items allowed in the array is 10.
         '422':
           description: The *Customer* was not valid. This is the result of missing required fields or trying to edit a read only field. See the response for more details.
           content:
@@ -345,6 +347,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/CustomerCollectionResponse'
+        '413':
+          description: The request payload is too large. The maximum number of items allowed in the array is 10.
         '422':
           description: |
             The `Customer` was not valid. This is the result of missing required fields, or of invalid data. See the response for more details.
@@ -1342,21 +1346,21 @@ paths:
         required: true
         x-examples:
           application/json:
-            - attribute_id: -52528392
+            - attribute_id: 52528392
               value: aliqua
               customer_id: 12990306
               id: 47143304
-            - attribute_id: -8263909
+            - attribute_id: 8263909
               value: 'n'
               customer_id: 1122433
-              id: -34305734
-            - attribute_id: -62186196
+              id: 34305734
+            - attribute_id: 62186196
               value: ''
               customer_id: 10906989
               id: 21175547
-            - attribute_id: -68742149
+            - attribute_id: 68742149
               value: l
-              customer_id: -74084818
+              customer_id: 74084818
               id: 99359610
         description: ''
       responses:
@@ -1633,15 +1637,12 @@ paths:
         required: true
   '/stores/{store_hash}/v3/customers/{customerId}/stored-instruments':
     get:
-      summary: Get Stored Instruments (Beta)
+      summary: Get Stored Instruments
       tags:
         - Customer Stored Instruments
       description: |-
         Lists all available stored instruments for a customer. This list will include all types of stored instruments namely card, account and bank_account instruments
 
-        <!-- theme: info -->
-        > #### Note
-        > * This endpoint is in beta.
       operationId: liststoredinstruments
       parameters:
         - $ref: '#/components/parameters/customerId'

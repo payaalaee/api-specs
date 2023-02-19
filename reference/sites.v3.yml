@@ -9,7 +9,6 @@ info:
     ## Authentication
 
     Authenticate requests by sending an [OAuth](/api-docs/getting-started/authentication/rest-api-authentication#oauth-scopes) `access_token` via `X-Auth-Token` HTTP header.
-
     ### Example
 
     ```http
@@ -97,7 +96,7 @@ info:
     |`category`|Route to category pages |    
     |`blog`|Route to blog page|    
     |`home`|Route to storefront homepage|
-    |`cart`|Route to shopper's cart|
+    |`cart`|Route to shopper’s cart|
     |`checkout`|Route to checkout page|
     |`search`|Route to store search page|
     |`account`|Route to account profile page|
@@ -297,7 +296,7 @@ paths:
         schema:
           type: string
     get:
-      summary: Get a Site's Routes
+      summary: Get a Site’s Routes
       operationId: index-site-routes
       parameters:
         - name: site_id
@@ -355,7 +354,7 @@ paths:
                         total_pages: 1
       tags:
         - Site Routes
-      description: Get a site's routes.
+      description: Get a site’s routes.
     post:
       summary: Create a Site Route
       operationId: post-site-route
@@ -438,7 +437,7 @@ paths:
 
         ## Usage Notes
         * `id` is required when updating an existing route.
-      summary: Update a Site's Routes
+      summary: Update a Site’s Routes
       parameters:
         - in: path
           name: site_id
@@ -449,9 +448,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/siteRoute_Full'
+              $ref: '#/components/schemas/siteRoute_Full'
         x-examples:
           application/json:
             - id: 1
@@ -502,7 +499,7 @@ paths:
                     meta: {}
       tags:
         - Site Routes
-      description: Get a site's route.
+      description: Get a site’s route.
     put:
       summary: Update a Site Route
       operationId: put-site-route
@@ -534,7 +531,7 @@ paths:
       tags:
         - Site Routes
       description: |
-        Update a site's route.
+        Update a site’s route.
     delete:
       summary: Delete a Site Route
       operationId: delete-route
@@ -554,7 +551,7 @@ paths:
           description: ''
       tags:
         - Site Routes
-      description: Delete a site's route.
+      description: Delete a site’s route.
     parameters:
       - name: store_hash
         in: path
@@ -584,8 +581,8 @@ paths:
         in: path
         required: true
     get:
-      summary: Get a Site's SSL/TLS Certificate Information
-      description: Obtain information about a site's SSL/TLS certificate.
+      summary: Get a Site’s SSL/TLS Certificate Information
+      description: Obtain information about a site’s SSL/TLS certificate.
       tags:
         - Site Certificate
       operationId: getSitesIdCertificate
@@ -595,15 +592,10 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    $ref: '#/components/schemas/InstalledCertificateDetail'
-                  meta:
-                    type: object
+                $ref: '#/components/schemas/CertificateResponse'
               examples: {}
     put:
-      summary: Upsert a Site's SSL/TLS Certificate Information
+      summary: Upsert a Site’s SSL/TLS Certificate Information
       operationId: putSiteIdCertificate
       tags:
         - Site Certificate
@@ -630,7 +622,33 @@ paths:
                     }
       description: |-
         - If a value for `url` is not supplied, the saved certificate is associated with the specified site’s `primary` URL.
-        - Use caution. Because this endpoint upserts, supplying an SSL certificate for a domain that already has a certificate connected overwrites the domain’s existing certificate.'
+        - Use caution. Because this endpoint upserts, supplying an SSL certificate for a domain that already has a certificate connected overwrites the domain’s extant certificate.'
+  '/stores/{store_hash}/v3/sites/certificates':
+    parameters:
+      - schema:
+          type: string
+        name: store_hash
+        in: path
+        required: true
+    get:
+      summary: Get Site Certificates
+      tags:
+        - Site Certificate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCertificatesResponse'
+      operationId: get-sites-certificates
+      description: Return all SSL certificates connected to domains within a store.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: 'urls:in'
+          description: Query certificates by one or more URLs
 components:
   schemas:
     _metaCollection:
@@ -699,6 +717,8 @@ components:
       x-internal: false
     _site:
       type: object
+      description: ''
+      title: ''
       properties:
         id:
           type: integer
@@ -713,18 +733,16 @@ components:
           type: string
           description: 'The date-time that this site was created, formatted as an [RFC-3339](https://www.ietf.org/rfc/rfc3339.txt) string.'
           example: '2022-01-04T04:15:50.000Z'
-          format: date-time
         updated_at:
           type: string
           description: 'The date-time that this site was last updated, formatted as an [RFC-3339](https://www.ietf.org/rfc/rfc3339.txt) string.'
           example: '2022-01-04T04:15:50.000Z'
-          format: date-time
         ssl_status:
           type: string
           enum:
             - dedicated
             - shared
-          description: 'Indicates if a private/dedicated SSL is installed on this site, or if it''s using shared SSL.'
+          description: Indicates whether a site is using a private/dedicated SSL or a shared SSL.
         urls:
           type: array
           description: 'All URLs that belong to the site, including `primary`, `canonical`, and `checkout` URLs.'
@@ -1104,6 +1122,18 @@ components:
         type: string
       x-tags:
         - Models
+    GetCertificatesResponse:
+      title: GetCertificatesResponse
+      x-stoplight:
+        id: wzfo263uqhopb
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstalledCertificateDetail'
+        meta:
+          type: object
   responses:
     502_GatewayError:
       description: 'If something happens during the request that causes it to fail, a 502 response will be returned. A new request should be made; however, it could fail.'
