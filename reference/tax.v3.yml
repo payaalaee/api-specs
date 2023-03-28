@@ -83,10 +83,12 @@ paths:
         '422':
           description: 'Unprocessable Entity, will include a specific error message referencing the issue.'
       description: |-
-        Set the HTTP Basic Authentication credentials and the (optional) profile for the specified provider. 
+        Set authentication information associated with a merchant's account on the tax provider's infrastructure:
+        - [HTTP Basic Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) (developer.mozilla.org) credentials
+        - (optional) profile for the specified provider. This is available for only supporting tax providers.
         
-        The configured `username` and `password` will be used to authenticate each API request to the Tax Provider from the associated store.
-        The tax provider's `profile` will be included in the url for Tax Provider API endpoints. 
+        The configured `username`, `password`, and `profile` (if available) will be used to authenticate each API request to the Tax Provider from the associated store. 
+        The tax provider's `profile` will be included in the url for [Tax Provider API](/docs/apps-api/tax) endpoints. 
 
         <!-- theme: info -->
         > #### Note
