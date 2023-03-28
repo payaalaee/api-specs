@@ -114,6 +114,7 @@ paths:
                 profile:
                   type: string
                   example: your_app_name
+                  description: Optional field that allows merchants to customize Tax Provider API endpoint URLs. Only available for supporting providers.
         description: 'Basic authentication information, associated with a merchant account on the third-party tax provider''s infrastructure.'
         x-examples:
           application/json:
